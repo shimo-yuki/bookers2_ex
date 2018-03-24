@@ -1,4 +1,5 @@
 task :remake_users_books => :environment do
+    Book.delete_all
     User.create(name: "サンプルタロウ", email: "sample@example.com", introduction: "1ヶ月に3冊ほど本を読みます!", password: "password")
     User.create(name: "テストジロウ", email: "test@example.com", introduction: "SF小説が大好きです。よろしくお願いします！", password: "password")    
     Book.create(title:"test1", body:"本文1", user_id: "1")
