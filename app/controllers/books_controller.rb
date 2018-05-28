@@ -12,6 +12,7 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    screen_user(@book)
   end
 
   def create
@@ -36,6 +37,12 @@ class BooksController < ApplicationController
   private
     def book_params
       params.require(:book).permit(:title, :body)
+    end
+
+    def screen_user(book)
+      if book.user.id != current_user.id
+        redirect_to books_path
+      end
     end
 
     
