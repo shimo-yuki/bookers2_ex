@@ -5,8 +5,8 @@
   </div> -->
   
 		<%= render 'form', book: @book %>
-		<%= link_to 'Show', @book %> |
-		<%= link_to 'Back', books_path %>
+		<%= link_to 'Show', @book, class: "book_#{@book.id}" %> |
+		<%= link_to 'Back', books_path, class: "back" %>
     </div>
     <div class='col-md-3'></div>
 </div>
