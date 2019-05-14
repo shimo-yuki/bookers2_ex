@@ -13,5 +13,41 @@
     <h2>Books</h2>
 
     <%= render 'books/index',books: @books %>
+
+    <% if current_user.id != @user.id %>
+      <% if @user.passive_relationships.find_by(follower_id: current_user.id) %>
+        <%= link_to "フォロー解除",  user_relationship_path(@user,  current_user.active_relationships.find_by(follower_id: current_user.id).id), method: :delete%>
+      <% else %>
+        <%= link_to "フォローする",  user_relationships_path(@user), method: :post %>
+      <% end %>
+    <% end %>
+    <table class="col-xs-4">
+      <tr>
+        <th>
+          <%= @user.following.count %>人フォローしています。
+        </th>
+      </tr>
+        <% @user.following.each do |follow| %>
+          <tr>
+            <td>
+              <%= follow.name %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <table class="col-xs-4">
+      <tr>
+        <th>
+          <%= @user.followers.count %>人フォローされています。
+        </th>
+      </tr>
+      <% @user.followers.each do |follow| %>
+        <tr>
+          <td>
+            <%= follow.name %>
+          </td>
+        </tr> 
+      <% end %>
+    </table>
   </div>
 </div>

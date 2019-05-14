@@ -1,9 +1,12 @@
  Rails.application.routes.draw do
 	devise_for :users
-  resources :users,only: [:show,:edit,:update,:index]
+  resources :users,only: [:show,:edit,:update,:index] do
+  	resources :relationships, only: [:create, :destroy]
+  end
   resources :books do
   	resources :comments, only: [:create, :update, :destroy, :edit]
   	resources :favorites, only: [:create, :destroy]
+
   end
 
   root 'home#top'
