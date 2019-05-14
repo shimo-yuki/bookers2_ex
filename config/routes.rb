@@ -3,6 +3,7 @@
   resources :users,only: [:show,:edit,:update,:index]
   resources :books do
   	resources :comments, only: [:create, :update, :destroy, :edit]
+  	resources :favorites, only: [:create, :destroy]
   end
 
   root 'home#top'

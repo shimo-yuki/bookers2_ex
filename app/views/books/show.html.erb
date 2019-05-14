@@ -23,6 +23,12 @@
         <% end %>
       </tr>
     </table>
+      <%= @book.favorites.count %>いいね！
+      <% if @book.favorites.find_by(user_id: current_user.id) %> 
+      <%= link_to "いいね削除！", book_favorite_path(@book), method: :delete %>
+    <% else %>
+      <%= link_to "いいねする！", book_favorites_path(@book), method: :post %>
+    <% end %>
 
     <% @comments.each do |comment| %>
       <div>
