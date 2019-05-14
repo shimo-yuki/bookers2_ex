@@ -24,5 +24,26 @@
       </tr>
     </table>
 
+    <% @comments.each do |comment| %>
+      <div>
+        name:<%= comment.user.name %>
+        comment:<%= comment.text %>
+        <% if comment.user_id.to_i == current_user.id %>
+          <%= link_to '編集',  edit_book_comment_path(@book, comment) %>
+          <%= link_to '削除', book_comment_path(comment), method: :delete %>
+        <% end %>
+      </div>
+    <% end %>
+    <%= form_for @comment, url: book_comments_path(@book) do |f| %>
+      <div class="field row">
+        <%= f.label :text %>
+        <%= f.text_field :text %>
+      </div>
+      <div class="actions row">
+        <%= f.submit class: 'btn btn-primary'%>
+      </div>
+    <% end %>
+
+
   </div>
 </div>
